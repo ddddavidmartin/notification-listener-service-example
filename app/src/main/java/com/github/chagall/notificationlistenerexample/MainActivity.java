@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * MIT License
@@ -107,7 +108,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int receivedNotificationCode = intent.getIntExtra("Notification Code", -1);
+            String packageName = intent.getStringExtra("packageName");
             changeInterceptedNotificationImage(receivedNotificationCode);
+            Toast toast = Toast.makeText(getBaseContext(), "Detected notification by " + packageName + ".", Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

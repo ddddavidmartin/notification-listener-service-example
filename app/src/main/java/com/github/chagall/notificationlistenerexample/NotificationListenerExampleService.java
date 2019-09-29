@@ -55,11 +55,10 @@ public class NotificationListenerExampleService extends NotificationListenerServ
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         int notificationCode = matchNotificationCode(sbn);
-        if (notificationCode != InterceptedNotificationCode.OTHER_NOTIFICATIONS_CODE) {
-            Intent intent = new Intent("com.github.chagall.notificationlistenerexample");
-            intent.putExtra("Notification Code", notificationCode);
-            sendBroadcast(intent);
-        }
+        Intent intent = new Intent("com.github.chagall.notificationlistenerexample");
+        intent.putExtra("Notification Code", notificationCode);
+        intent.putExtra("packageName", sbn.getPackageName());
+        sendBroadcast(intent);
     }
 
     @Override
